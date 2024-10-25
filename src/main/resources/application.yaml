@@ -1,6 +1,6 @@
 spring:
   application:
-    name: InventoryService
+    name: OrderService
   datasource:
     url: jdbc:h2:mem:test
     driver-class-name: org.h2.Driver
@@ -14,4 +14,6 @@ spring:
       ddl-auto: create-drop
     show-sql: true
 server:
-  port: 8082
+  port: 8083
+inventoryService:
+  url: http://localhost:8082/api/v1/inventory-manager
