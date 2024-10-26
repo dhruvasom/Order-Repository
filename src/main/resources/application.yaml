@@ -16,4 +16,4 @@ spring:
 server:
   port: 8083
 inventoryService:
-  url: http://localhost:8082/api/v1/inventory-manager
+  url: http://localhost:8082

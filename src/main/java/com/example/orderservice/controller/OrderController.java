@@ -3,6 +3,7 @@ package com.example.orderservice.controller;
 
 import com.example.orderservice.entity.Order;
 import com.example.orderservice.service.OrderService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class OrderController {
         try {
             Order savedOrder = orderService.createOrder(order);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
-        } catch (RuntimeException e) {
+        } catch (RuntimeException | JsonProcessingException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
@@ -51,7 +52,7 @@ public class OrderController {
         try {
             Order updatedOrder = orderService.updateOrder(id, orderDetails);
             return ResponseEntity.ok(updatedOrder);
-        } catch (RuntimeException e) {
+        } catch (RuntimeException | JsonProcessingException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }

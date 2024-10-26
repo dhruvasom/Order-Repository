@@ -3,9 +3,9 @@ package com.example.orderservice.service;
 import com.example.orderservice.dto.InventoryCheckRequest;
 import com.example.orderservice.entity.Order;
 import com.example.orderservice.entity.repository.OrderRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order createOrder(Order order) {
+    public Order createOrder(Order order) throws JsonProcessingException {
         InventoryCheckRequest request = new InventoryCheckRequest(order.getProduct(), order.getQuantity());
         System.out.println(inventoryService.checkInventory(request));
         // Check inventory before creating the order
@@ -35,7 +35,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order updateOrder(Long id, Order orderDetails) {
+    public Order updateOrder(Long id, Order orderDetails) throws JsonProcessingException {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
 
